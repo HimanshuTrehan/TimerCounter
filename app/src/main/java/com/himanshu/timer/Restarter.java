@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.himanshu.timer.Services.YourService;
 
 public class Restarter extends BroadcastReceiver {
+
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.i("Broadcast Listened", "Service tried to stop");

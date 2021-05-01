@@ -16,14 +16,19 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import com.himanshu.timer.MainActivity;
+import com.himanshu.timer.Modal.EventData;
 import com.himanshu.timer.Restarter;
+import com.himanshu.timer.Utils.Prefs;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class YourService extends Service {
     public int counter=0;
-
+    private EventBus bus = EventBus.getDefault();
+    EventData eventData = null;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -36,7 +41,7 @@ public class YourService extends Service {
     @RequiresApi(Build.VERSION_CODES.O)
     private void startMyOwnForeground()
     {
-        String NOTIFICATION_CHANNEL_ID = "example.permanence";
+        String NOTIFICATION_CHANNEL_ID = "himanshu.timer";
         String channelName = "Background Service";
         NotificationChannel chan = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_NONE);
         chan.setLightColor(Color.BLUE);
@@ -59,23 +64,22 @@ public class YourService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
+
         startTimer();
         return START_STICKY;
     }
 
-
     @Override
     public void onDestroy() {
+
         super.onDestroy();
         stoptimertask();
-
         Intent broadcastIntent = new Intent();
         broadcastIntent.setAction("restartservice");
         broadcastIntent.setClass(this, Restarter.class);
         this.sendBroadcast(broadcastIntent);
+
     }
-
-
 
     private Timer timer;
     private TimerTask timerTask;
@@ -83,11 +87,14 @@ public class YourService extends Service {
     public void startTimer() {
         timer = new Timer();
         timerTask = new TimerTask() {
+
             public void run() {
                 Log.i("Count", "=========  "+ (counter++));
+                eventData = new EventData(counter);
+                bus.post(eventData);
             }
         };
-        timer.schedule(timerTask, 1000, 1000); //
+        timer.schedule(timerTask, 5000, 1000); //
     }
 
     public void stoptimertask() {
