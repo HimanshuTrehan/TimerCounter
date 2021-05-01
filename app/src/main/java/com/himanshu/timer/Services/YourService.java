@@ -27,7 +27,7 @@ import java.util.TimerTask;
 
 public class YourService extends Service {
     public int counter=0;
-    private EventBus bus = EventBus.getDefault();
+    private  EventBus bus = EventBus.getDefault();
     EventData eventData = null;
     @Override
     public void onCreate() {
@@ -71,14 +71,12 @@ public class YourService extends Service {
 
     @Override
     public void onDestroy() {
-
         super.onDestroy();
         stoptimertask();
         Intent broadcastIntent = new Intent();
         broadcastIntent.setAction("restartservice");
         broadcastIntent.setClass(this, Restarter.class);
         this.sendBroadcast(broadcastIntent);
-
     }
 
     private Timer timer;
@@ -89,7 +87,7 @@ public class YourService extends Service {
         timerTask = new TimerTask() {
 
             public void run() {
-                Log.i("Count", "=========  "+ (counter++));
+                Log.i("Count", "== "+ (counter++));
                 eventData = new EventData(counter);
                 bus.post(eventData);
             }

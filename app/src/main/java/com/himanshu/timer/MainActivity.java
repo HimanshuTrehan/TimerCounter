@@ -107,7 +107,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     stop.setText("Start");
                     timer.setText(temp);
                     bus.unregister(this);
-            //
 
                 }
                 else
