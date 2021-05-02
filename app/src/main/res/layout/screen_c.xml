@@ -67,6 +67,7 @@
                 />
         </RelativeLayout>
         <RelativeLayout
+            android:padding="5dp"
             android:id="@+id/timer_lyt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -94,7 +95,7 @@
 
         </RelativeLayout>
 
-        <RelativeLayout
+     <!--   <RelativeLayout
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:id="@+id/next_button"
@@ -110,7 +111,7 @@
                 android:textColor="@color/white"
                 android:background="@drawable/round_button"
                 />
-        </RelativeLayout>
+        </RelativeLayout>-->
 
         <RelativeLayout
             android:layout_marginTop="20dp"
@@ -118,7 +119,7 @@
             android:id="@+id/stop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/next_button">
+            android:layout_below="@+id/timer_lyt">
 
 
             <Button
