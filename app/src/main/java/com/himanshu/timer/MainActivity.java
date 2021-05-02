@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mServiceIntent = new Intent(this, mYourService.getClass());
         if (!isMyServiceRunning(mYourService.getClass())) {
             if(isrunning.equalsIgnoreCase("1")) {
-
+                Log.i("NOT","not running");
             }
             else {
                 startService(mServiceIntent);
