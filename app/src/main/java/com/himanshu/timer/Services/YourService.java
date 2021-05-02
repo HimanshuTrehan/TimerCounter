@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -27,6 +28,7 @@ import java.util.TimerTask;
 
 public class YourService extends Service {
     public int counter=0;
+    int temp = 1;
     private  EventBus bus = EventBus.getDefault();
     EventData eventData = null;
     @Override
@@ -73,6 +75,7 @@ public class YourService extends Service {
     public void onDestroy() {
         super.onDestroy();
         stoptimertask();
+
         Intent broadcastIntent = new Intent();
         broadcastIntent.setAction("restartservice");
         broadcastIntent.setClass(this, Restarter.class);
@@ -92,7 +95,7 @@ public class YourService extends Service {
                 bus.post(eventData);
             }
         };
-        timer.schedule(timerTask, 5000, 1000); //
+        timer.schedule(timerTask, 5000, 1000*temp); //
     }
 
     public void stoptimertask() {

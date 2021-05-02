@@ -79,18 +79,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-    @Override
-    protected void onDestroy() {
-        //stopService(mServiceIntent);
-        bus.unregister(this);
-        super.onDestroy();
-        String stop = Prefs.getKey(getApplicationContext(),"stop");
-            Intent broadcastIntent = new Intent();
-            broadcastIntent.setAction("restartservice");
-            broadcastIntent.setClass(this, Restarter.class);
-            this.sendBroadcast(broadcastIntent);
-
-    }
+//    @Override
+//    protected void onDestroy() {
+//        //stopService(mServiceIntent);
+//        bus.unregister(this);
+//        super.onDestroy();
+//        String stop = Prefs.getKey(getApplicationContext(),"stop");
+//            Intent broadcastIntent = new Intent();
+//            broadcastIntent.setAction("restartservice");
+//            broadcastIntent.setClass(this, Restarter.class);
+//            this.sendBroadcast(broadcastIntent);
+//
+//    }
 
     @Override
     public void onClick(View view) {
